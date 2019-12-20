@@ -3,28 +3,22 @@
 
 import os
 
-def traverse_folder(root_path,file_list,dir_list):
+def traverse_folder(root_dir,file_list):
     #获取该目录下所有的文件名称和目录名称
-    # dir_or_files = os.listdir(root_path)
-    # for dir_file in dir_or_files:
-    #     #获取目录或者文件的路径
-    #     dir_file_path = os.path.join(root_path,dir_file)
-    #     #判断该路径为文件还是路径
-    #     if os.path.isdir(dir_file_path):
-    #         dir_list.append(dir_file_path)
-    #         #递归获取所有文件和目录的路径
-    #         get_file_path(dir_file_path,file_list,dir_list)
-    #     else:
-    #         file_list.append(dir_file_path)
-    for root, dirs, files in os.walk(root_path):
-        files = [f for f in files if not f[0] == '.']
-        dirs[:] = [d for d in dirs if not d[0] == '.']
-        # use files and dirs
-        for file_name in files:
-            dir_file_path = os.path.join(root, file_name)
-            file_list.append(dir_file_path)
-
-        for dir_name in dirs:
-            dir_path = os.path.join(root, dir_name)
-            dir_list.append(dir_path)
-            traverse_folder(dir_path,file_list,dir_list)
+    # list = os.listdir(root_dir)  # 列出文件夹下所有的目录与文件
+    # for i in range(0, len(list)):
+    #     path = os.path.join(root_dir, list[i])
+    #     if os.path.isdir(path):
+    #         if not path == '.':
+    #             traverse_folder(path,file_list)
+    #     if os.path.isfile(path):
+    #         if not path == '.':
+    #             file_list.append(path)
+    for item in os.scandir(root_dir):
+        if item.path == '.':
+            continue
+        path = os.path.join(root_dir,item.path)
+        if item.is_dir():
+              traverse_folder(path,file_list)
+        elif item.is_file():
+              file_list.append(item.path)
