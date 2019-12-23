@@ -1,7 +1,9 @@
 #!/usr/bin/env python 
 # -*- coding:utf-8 -*-
 
-from osgeo import gdal
+import gdal, osr
+import osgeo.gdal
+osgeo.gdal.GetDriverByName
 
 def PixelToWorld(adfGeoTransform,lCol, lRow, dblX,dblY):
     dblX = adfGeoTransform[0] + lCol * adfGeoTransform[1] + lRow * adfGeoTransform[2]
@@ -16,4 +18,6 @@ def GetRasterEnv(imgFile):
     print(adfGeoTransform[3])
     imgWidth = dataset.RasterXSize
     imgHeight = dataset.RasterYSize
+    print(imgWidth)
+    print(imgHeight)
 

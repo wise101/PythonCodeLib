@@ -26,6 +26,7 @@ if __name__ == "__main__":
     #dir_list = []
     #util.filelib.traverse_folder(root_path,file_list)
     #print(file_list)
-    imgFile = r"D:\TestData\OrthoAlgoTestData\src\GF1_PMS1_E115.7_N38.9_20180409_L1A0003111678_FUSION_GEO.tiff"
+#   imgFile = r"D:\TestData\OrthoAlgoTestData\src\GF1_PMS1_E115.7_N38.9_20180409_L1A0003111678_FUSION_GEO.tiff"
+    imgFile = r"/sedata/data/admin/Quanliucheng/Original_hubeiorchongqing_410000or500000/decompress/GF1_PMS1_E111.5_N30.0_20190725_L1A0004140035-PAN1/GF1_PMS1_E111.5_N30.0_20190725_L1A0004140035-PAN1.tiff"
     geo_tool.searchRefImg.GetRasterEnv(imgFile)
 
