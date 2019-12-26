@@ -64,6 +64,11 @@ def FuseFlowTest():
         outFolder = "/usr/seis/data/admin/Quanliucheng/langfang/out/"
         #配置基准文件
         panRefImgs = ["/usr/seis/data/admin/Quanliucheng/langfang/REF/langfangmos.img"]
+        jsonArgument["panRefImgs"] = panRefImgs
+        jsonArgument["orthoMssRes"] = 0.00008
+        jsonArgument["orthoPanRes"] = 0.00002
+        jsonArgument["orthoWKT"] = ""
+        url = "http://172.16.40.54:6060/ortho/api/v1/rawdata/fuse"
         for i in range(0, len(new_pan_list)):
             fileName = os.path.basename(new_pan_list[i])
             fuseFile = os.path.splitext(fileName)[0] + "_fuse.tiff"
@@ -73,13 +78,8 @@ def FuseFlowTest():
             mssFileName = os.path.basename(new_mss_list[i])
             jsonArgument["mssPath"] = new_mss_list[i]
             jsonArgument["mssOrthoPath"] = outFolder + mssFileName
-            jsonArgument["panRefImgs"] = panRefImgs
-            jsonArgument["orthoMssRes"] = 0.00008
-            jsonArgument["orthoPanRes"] = 0.00002
-            jsonArgument["orthoWKT"] = ""
-        url = "http://172.16.40.54:6060/ortho/api/v1/rawdata/fuse"
-        # 转换成json字符串
-        json_str = json.dumps(jsonArgument)
-        print(json_str)
-        r11 = requests.post(url, data=json_str,headers={'Content-Type': 'application/json'})
-        print(r11.text)
+            # 转换成json字符串
+            json_str = json.dumps(jsonArgument)
+            print(json_str)
+            r11 = requests.post(url, data=json_str,headers={'Content-Type': 'application/json'})
+            print(r11.text)
