@@ -85,8 +85,8 @@ def FuseFlowTest():
             #设置超时时间为10000秒
             r11 = requests.post(url, data=json_str, timeout=10000)
             print(r11.text)
+
 #url : 接口的url地址
 #refImgFolder : 基准文件夹
 #outFolder : 基准文件夹
-def FuseFlowTest(url,refImgFolder,outFolder):
-
+#def FuseFlowTest(url,refImgFolder,outFolder):
