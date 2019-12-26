@@ -4,6 +4,22 @@
 import os
 import util.filelib
 
+#全色影像数组和多光谱影像数组配对
+def ImagePair(orig_pan_list,orig_mss_list,new_pan_list,new_mss_list):
+    for pan_file in orig_pan_list:
+        str = pan_file.split('/')[1:]
+        panName = str[-1].split('-')[0:]
+        for mss_file in orig_mss_list:
+            str = mss_file.split('/')[1:]
+            mssName = str[-1].split('-')[0:]
+            if(panName[0]==mssName[0])
+                new_pan_list.append(pan_file)
+                new_mss_list.append(mss_file)
+    if(new_pan_list.len>0 and new_pan_list.len==new_mss_list.len):
+        return 1
+    else:
+        return 0
+
 # 搜索文件夹获取文件，包括pan文件夹和mss文件夹
 # 构建单个接口的json字符串,包括构建全色数组和多光谱数组，查找相应的基准影像
 # 循环调用融合接口
@@ -29,3 +45,7 @@ def FuseFlowTest():
         filename = os.path.basename(mss_file)
         docker_mss_files.append(docker_mss_folder+filename)
     print(docker_mss_files)
+
+    new_pan_list = []
+    new_mss_list = []
+    ImagePair(docker_pan_files, docker_mss_files, new_pan_list, new_mss_list)
