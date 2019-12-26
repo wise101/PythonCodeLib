@@ -83,7 +83,7 @@ def FuseFlowTest():
             print(json_str)
             #r11 = requests.post(url, data=json_str,headers={'Content-Type': 'application/json'})
             #设置超时时间为10000秒
-            r11 = requests.post(url, data=json_str, timeout=10000)
+            r11 = requests.post(url, data=json_str, timeout=10000，headers={'Content-Type': 'application/json'})
             print(r11.text)
 
 #url : 接口的url地址
