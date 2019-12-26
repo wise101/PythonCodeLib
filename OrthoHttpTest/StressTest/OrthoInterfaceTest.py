@@ -3,6 +3,8 @@
 
 import os
 import util.filelib
+import requests
+import json
 
 #全色影像数组和多光谱影像数组配对
 def ImagePair(orig_pan_list,orig_mss_list,new_pan_list,new_mss_list):
@@ -49,5 +51,32 @@ def FuseFlowTest():
     new_pan_list = []
     new_mss_list = []
     if(1==ImagePair(docker_pan_files, docker_mss_files, new_pan_list, new_mss_list)):
-        print(new_pan_list)
-        print(new_mss_list)
+        #print(new_pan_list)
+        #print(new_mss_list)
+        #构造ortho接口json字符串
+        jsonArgument = {}
+        jsonArgument["constZ"] = 0
+        jsonArgument["demPath"] = "/usr/seis/data/admin/Quanliucheng/langfang/DEM/langfangdem.tif"
+        jsonArgument["feedNum"] = 1000
+        jsonArgument["similarParm"] = 1
+        jsonArgument["rpcError"] = 5.0
+        #配置输出文件夹
+        outFolder = "/usr/seis/data/admin/Quanliucheng/langfang/out/"
+        #配置基准文件
+        panRefImgs = ["/usr/seis/data/admin/Quanliucheng/langfang/REF/langfangmos.img"]
+        for i in range(0, len(new_pan_list)):
+            fileName = os.path.basename(new_pan_list[i])
+            fuseFile = os.path.splitext(fileName)[0] + "_fuse.tiff"
+            jsonArgument["imgFusePath"] = outFolder+fuseFile
+            jsonArgument["panPath"] = new_pan_list[i]
+            jsonArgument["panOrthoPath"] = outFolder + fileName
+            mssFileName = os.path.basename(new_mss_list[i])
+            jsonArgument["mssPath"] = new_mss_list[i]
+            jsonArgument["mssOrthoPath"] = outFolder + mssFileName
+            jsonArgument["panRefImgs"] = panRefImgs
+            jsonArgument["orthoMssRes"] = 0.00008
+            jsonArgument["orthoPanRes"] = 0.00002
+            jsonArgument["orthoWKT"] = ""
+        url = "http://172.16.40.54:6060/ortho/api/v1/rawdata/fuse"
+        r11 = requests.post(url, data=json.dumps(jsonArgument), headers={'Content-Type': 'application/json'})
+        print(r11.text)
