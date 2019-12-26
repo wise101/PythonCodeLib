@@ -78,5 +78,8 @@ def FuseFlowTest():
             jsonArgument["orthoPanRes"] = 0.00002
             jsonArgument["orthoWKT"] = ""
         url = "http://172.16.40.54:6060/ortho/api/v1/rawdata/fuse"
-        r11 = requests.post(url, data=json.dumps(jsonArgument), headers={'Content-Type': 'application/json'})
+        # 转换成json字符串
+        json_str = json.dumps(jsonArgument)
+        print(json_str)
+        r11 = requests.post(url, data=json_str,headers={'Content-Type': 'application/json'})
         print(r11.text)
