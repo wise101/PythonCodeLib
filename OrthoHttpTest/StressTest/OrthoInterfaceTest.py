@@ -11,7 +11,7 @@ def FuseFlowTest():
     pan_file_list = []
     pan_floder = '/sedata/data/admin/Quanliucheng/langfang/src/PAN'
     util.filelib.traverse_folder(pan_floder, pan_file_list)
-    print(pan_file_list)
+    #print(pan_file_list)
     docker_pan_folder = '/usr/seis/data/admin/Quanliucheng/langfang/src/PAN/'
     docker_pan_files = []
     for pan_file in pan_file_list:
@@ -22,7 +22,7 @@ def FuseFlowTest():
     mss_file_list = []
     mss_floder = '/sedata/data/admin/Quanliucheng/langfang/src/MSS'
     util.filelib.traverse_folder(mss_floder, mss_file_list)
-    print(mss_file_list)
+    #print(mss_file_list)
     docker_mss_folder = '/usr/seis/data/admin/Quanliucheng/langfang/src/MSS/'
     docker_mss_files = []
     for mss_file in mss_file_list:
