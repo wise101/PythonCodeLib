@@ -15,7 +15,7 @@ def ImagePair(orig_pan_list,orig_mss_list,new_pan_list,new_mss_list):
             if(panName[0]==mssName[0]):
                 new_pan_list.append(pan_file)
                 new_mss_list.append(mss_file)
-    if(new_pan_list.len>0 and new_pan_list.len==new_mss_list.len):
+    if(len(new_pan_list)>0 and len(new_pan_list)==len(new_mss_list)):
         return 1
     else:
         return 0
@@ -48,4 +48,6 @@ def FuseFlowTest():
 
     new_pan_list = []
     new_mss_list = []
-    ImagePair(docker_pan_files, docker_mss_files, new_pan_list, new_mss_list)
+    if(1==ImagePair(docker_pan_files, docker_mss_files, new_pan_list, new_mss_list)):
+        print(new_pan_list)
+        print(new_mss_list)
