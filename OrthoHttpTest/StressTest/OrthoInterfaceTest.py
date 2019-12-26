@@ -12,7 +12,7 @@ def ImagePair(orig_pan_list,orig_mss_list,new_pan_list,new_mss_list):
         for mss_file in orig_mss_list:
             str = mss_file.split('/')[1:]
             mssName = str[-1].split('-')[0:]
-            if(panName[0]==mssName[0])
+            if(panName[0]==mssName[0]):
                 new_pan_list.append(pan_file)
                 new_mss_list.append(mss_file)
     if(new_pan_list.len>0 and new_pan_list.len==new_mss_list.len):
