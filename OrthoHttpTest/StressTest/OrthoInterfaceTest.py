@@ -1,6 +1,7 @@
 #!/usr/bin/env python 
 # -*- coding:utf-8 -*-
 
+import os
 import util.filelib
 
 # 搜索文件夹获取文件，包括pan文件夹和mss文件夹
