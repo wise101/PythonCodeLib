@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import requests
+import json
 
 #参考资料
 #Python - 优雅而简单地完成http请求
@@ -13,7 +14,16 @@ import requests
 def PostTest(url,json_data):
     # 发送post请求
     #json_data = {"user": "yunweicai", "op": "post"}
-    r11 = requests.post(url,json_data)
+    #headers = {'content-type': 'charset=utf8'}
+    #headers = {'content-type':'application/json'}
+    #headers = {'content-type': 'application/octet-stream'}
+    #data = json.dumps(json_data)
+    #r11 = requests.post(url,json_data,headers)
+    r11=requests.post(url, data=json.dumps(json_data), headers={'Content-Type': 'application/json'})
+    #r11 = requests.post(url, data)
+    #r11 = requests.post(url, json_data, headers)
+    #values_json = json.dumps(json_data)
+    #r11 = requests.post(url, values_json, headers)
     print(r11.text)
 
 def GetTest(url):
