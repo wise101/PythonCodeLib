@@ -24,7 +24,14 @@ if __name__ == "__main__":
     #根目录路径
     #data_folder = r"D:\TestData\OrthoAlgoTestData"
     #StressTest.OrthoInterfaceTest.FuseFlowTest(data_folder)
-    StressTest.OrthoInterfaceTest.FuseFlowTest()
+    #StressTest.OrthoInterfaceTest.FuseFlowTest()
+
+    url = "http://172.16.40.54:6060/ortho/api/v1/rawdata/fuse"
+    refImgFolder = '/sedata/data/admin/Quanliucheng/National_2M_hubei_420000/Standard_5W_DOM'
+    dataFolder = '/sedata/data/admin/Quanliucheng/Original_hubeiorchongqing_410000or500000/decompress'
+    outFolder = '/sedata/data/admin/Quanliucheng/Original_hubeiorchongqing_410000or500000/out'
+    StressTest.OrthoInterfaceTest.FuseFlowTest2(url,refImgFolder,dataFolder,outFolder)
+
 #   root_path = r"/home/work/PythonCodeLib"
     #用来存放所有的文件路径
     #file_list = []
