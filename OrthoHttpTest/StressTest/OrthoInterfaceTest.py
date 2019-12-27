@@ -92,4 +92,12 @@ def FuseFlowTest():
 #demFile : dem文件
 #dataFolder : 数据文件夹，里面有全色数据和多光谱数据（需要从中提取全色数据和多光谱数据）
 #outFolder : 输出文件夹
-#def FuseFlowTest(url,refImgFolder,outFolder):
+def FuseFlowTest2(url,refImgFolder,dataFolder,outFolder):
+    pan_list = []
+    util.filelib.SearchSpecData(dataFolder,pan_list,'PAN')
+    for i in range(0, len(pan_list)):
+        print(pan_list[i])
+    mss_list = []
+    util.filelib.SearchSpecData(dataFolder, mss_list, 'MSS')
+    for i in range(0, len(mss_list)):
+        print(mss_list[i])
