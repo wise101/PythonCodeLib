@@ -95,9 +95,24 @@ def FuseFlowTest():
 def FuseFlowTest2(url,refImgFolder,dataFolder,outFolder):
     pan_list = []
     util.filelib.SearchSpecData(dataFolder,pan_list,'PAN')
+    if(0==len(pan_list)):
+        return 0
+
+    #全色数据路径替换为docker里面的路径
     for i in range(0, len(pan_list)):
-        print(pan_list[i])
+         pan_list[i] = pan_list[i].replace('/sedata/','/usr/seis/')
     mss_list = []
     util.filelib.SearchSpecData(dataFolder, mss_list, 'MSS')
-    # for i in range(0, len(mss_list)):
-    #     print(mss_list[i])
+    if(0==len(mss_list))
+        return 0
+
+    # 多光谱数据路径替换为docker里面的路径
+    for i in range(0, len(mss_list)):
+        mss_list[i] = mss_list[i].replace('/sedata/','/usr/seis/')
+
+    #全色数据和多光谱数据配对
+    new_pan_list = []
+    new_mss_list = []
+    if(1==ImagePair(pan_list,mss_list, new_pan_list, new_mss_list)):
+        #查找对应的基准数据
+
