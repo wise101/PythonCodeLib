@@ -4,7 +4,8 @@
 import os
 
 #遍历文件夹搜索tiff文件
-def traverse_folder(root_dir,file_list):
+#file_ext = '.tiff'
+def traverse_folder(root_dir,file_list,file_ext):
     #获取该目录下所有的文件名称和目录名称
     # list = os.listdir(root_dir)  # 列出文件夹下所有的目录与文件
     # for i in range(0, len(list)):
@@ -22,7 +23,7 @@ def traverse_folder(root_dir,file_list):
         if item.is_dir():
               traverse_folder(path,file_list)
         elif item.is_file():
-            if os.path.splitext(item.path)[1] == '.tiff':
+            if os.path.splitext(item.path)[1] == file_ext:
               file_list.append(item.path)
 
 #遍历文件夹查找指定的文件
