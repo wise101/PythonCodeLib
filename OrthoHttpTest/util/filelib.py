@@ -37,5 +37,5 @@ def SearchSpecData(data_folder,file_list,filter_str):
         if item.is_dir():
               SearchSpecData(path,file_list,filter_str)
         elif item.is_file():
-            if (-1!=item.path.find(filter_str)):
+            if (-1!=item.path.find(filter_str) and (os.path.splitext(item.path)[1] == '.tiff')):
                 file_list.append(item.path)
