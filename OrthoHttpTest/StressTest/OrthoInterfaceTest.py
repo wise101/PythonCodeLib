@@ -6,6 +6,8 @@ import util.filelib
 import requests
 import json
 
+import geo_tool.searchRefImg
+
 #全色影像数组和多光谱影像数组配对
 def ImagePair(orig_pan_list,orig_mss_list,new_pan_list,new_mss_list):
     for pan_file in orig_pan_list:
@@ -115,4 +117,6 @@ def FuseFlowTest2(url,refImgFolder,dataFolder,outFolder):
     new_mss_list = []
     if(1==ImagePair(pan_list,mss_list, new_pan_list, new_mss_list)):
         #查找对应的基准数据
-
+        for i in range(0, len(pan_list)):
+            ref_list = []
+            geo_tool.searchRefImg.GetRefData(pan_list[0], refImgFolder, ref_list)
