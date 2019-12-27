@@ -5,6 +5,8 @@ import gdal, osr
 import osgeo.gdal
 osgeo.gdal.GetDriverByName
 
+import util.filelib
+
 class Point:
       ptX = 0.0
       ptY = 0.0
@@ -63,3 +65,13 @@ def GetRasterEnv(imgFile,env):
     # print(dbMaxx)
     # print(dbMiny)
     # print(dbMaxy)
+
+#imgFile        --- 影像文件路径
+#ref_folder     --- 基准文件夹
+#ref_list       --- 输出参数：基准数组
+def GetRefData(imgFile,ref_folder,ref_list):
+    env = RasterEnv()
+    GetRasterEnv(imgFile, env)
+    file_ext = '.tif'
+    all_ref_list = []
+    util.filelib.traverse_folder(ref_folder, all_ref_list, file_ext)
