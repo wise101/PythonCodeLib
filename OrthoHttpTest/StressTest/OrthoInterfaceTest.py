@@ -99,5 +99,5 @@ def FuseFlowTest2(url,refImgFolder,dataFolder,outFolder):
         print(pan_list[i])
     mss_list = []
     util.filelib.SearchSpecData(dataFolder, mss_list, 'MSS')
-    for i in range(0, len(mss_list)):
-        print(mss_list[i])
+    # for i in range(0, len(mss_list)):
+    #     print(mss_list[i])
