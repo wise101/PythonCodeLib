@@ -9,6 +9,7 @@ import json
 #全色影像数组和多光谱影像数组配对
 def ImagePair(orig_pan_list,orig_mss_list,new_pan_list,new_mss_list):
     for pan_file in orig_pan_list:
+        #获取全色文件名,str为全色文件名，如GF2_PMS2_E114.2_N31.5_20190816_L1A0004184403-PAN2.tiff
         str = pan_file.split('/')[1:]
         panName = str[-1].split('-')[0:]
         for mss_file in orig_mss_list:
@@ -88,5 +89,7 @@ def FuseFlowTest():
 
 #url : 接口的url地址
 #refImgFolder : 基准文件夹
-#outFolder : 基准文件夹
+#demFile : dem文件
+#dataFolder : 数据文件夹，里面有全色数据和多光谱数据（需要从中提取全色数据和多光谱数据）
+#outFolder : 输出文件夹
 #def FuseFlowTest(url,refImgFolder,outFolder):
