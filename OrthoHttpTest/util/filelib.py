@@ -24,3 +24,18 @@ def traverse_folder(root_dir,file_list):
         elif item.is_file():
             if os.path.splitext(item.path)[1] == '.tiff':
               file_list.append(item.path)
+
+#遍历文件夹查找指定的文件
+#data_folder  --- 数据目录
+#file_list    --- 文件数组
+#filter_str   --- 过滤字符串
+def SearchSpecData(data_folder,file_list,filter_str)
+    for item in os.scandir(root_dir):
+        if item.path == '.':
+            continue
+        path = os.path.join(root_dir,item.path)
+        if item.is_dir():
+              traverse_folder(path,file_list)
+        elif item.is_file():
+            if -1！=item.path.find(filter_str):
+              file_list.append(item.path)
