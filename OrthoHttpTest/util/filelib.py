@@ -37,5 +37,5 @@ def SearchSpecData(data_folder,file_list,filter_str)
         if item.is_dir():
               traverse_folder(path,file_list)
         elif item.is_file():
-            if -1！=item.path.find(filter_str):
-              file_list.append(item.path)
+            if (-1！=item.path.find(filter_str)):
+                file_list.append(item.path)
