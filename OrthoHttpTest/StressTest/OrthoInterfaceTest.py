@@ -103,7 +103,7 @@ def FuseFlowTest2(url,refImgFolder,dataFolder,outFolder):
          pan_list[i] = pan_list[i].replace('/sedata/','/usr/seis/')
     mss_list = []
     util.filelib.SearchSpecData(dataFolder, mss_list, 'MSS')
-    if(0==len(mss_list))
+    if(0==len(mss_list)):
         return 0
 
     # 多光谱数据路径替换为docker里面的路径
