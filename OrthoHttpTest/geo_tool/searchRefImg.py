@@ -31,37 +31,41 @@ def PixelToWorld_Ex(adfGeoTransform,lCol, lRow, pt):
     pt.ptY = adfGeoTransform[3] + lCol * adfGeoTransform[4] + lRow * adfGeoTransform[5]
 
 def GetRasterEnv(imgFile,env):
-    print(imgFile)
-    dataset = gdal.Open(imgFile)
+    #print(imgFile)
+    gdal.UseExceptions()
+    try:
+        dataset = gdal.Open(imgFile)
 #   print(imgFile, ' 宽=', dataset.RasterXSize)
-    adfGeoTransform = dataset.GetGeoTransform()
+        adfGeoTransform = dataset.GetGeoTransform()
     # 左上角地理坐标
     #print(adfGeoTransform[0])
     #print(adfGeoTransform[3])
-    lWidth = dataset.RasterXSize
-    lHeight = dataset.RasterYSize
-    print(lWidth)
-    print(lHeight)
-    dbX = [0.0, 0.0, 0.0, 0.0]
-    dbY = [0.0, 0.0, 0.0, 0.0]
-    pt = Point()
-    PixelToWorld_Ex(adfGeoTransform, 0, 0, pt) # 左上角坐标
-    dbX[0] = pt.ptX
-    dbY[0] = pt.ptY
-    PixelToWorld_Ex(adfGeoTransform, lWidth, 0,pt )  #  右上角坐标
-    dbX[1] = pt.ptX
-    dbY[1] = pt.ptY
-    PixelToWorld_Ex(adfGeoTransform, lWidth, lHeight, pt) # 右下角点坐标
-    dbX[2] = pt.ptX
-    dbY[2] = pt.ptY
-    PixelToWorld_Ex(adfGeoTransform, 0, lHeight,pt) # 左下角坐标
-    dbX[3] = pt.ptX
-    dbY[3] = pt.ptY
+        lWidth = dataset.RasterXSize
+        lHeight = dataset.RasterYSize
+        # print(lWidth)
+        # print(lHeight)
+        dbX = [0.0, 0.0, 0.0, 0.0]
+        dbY = [0.0, 0.0, 0.0, 0.0]
+        pt = Point()
+        PixelToWorld_Ex(adfGeoTransform, 0, 0, pt) # 左上角坐标
+        dbX[0] = pt.ptX
+        dbY[0] = pt.ptY
+        PixelToWorld_Ex(adfGeoTransform, lWidth, 0,pt )  #  右上角坐标
+        dbX[1] = pt.ptX
+        dbY[1] = pt.ptY
+        PixelToWorld_Ex(adfGeoTransform, lWidth, lHeight, pt) # 右下角点坐标
+        dbX[2] = pt.ptX
+        dbY[2] = pt.ptY
+        PixelToWorld_Ex(adfGeoTransform, 0, lHeight,pt) # 左下角坐标
+        dbX[3] = pt.ptX
+        dbY[3] = pt.ptY
 
-    env.MinX = min(min(min(dbX[0], dbX[1]), dbX[2]), dbX[3])
-    env.MaxX = max(max(max(dbX[0], dbX[1]), dbX[2]), dbX[3])
-    env.MinY = min(min(min(dbY[0], dbY[1]), dbY[2]), dbY[3])
-    env.MaxY = max(max(max(dbY[0], dbY[1]), dbY[2]), dbY[3])
+        env.MinX = min(min(min(dbX[0], dbX[1]), dbX[2]), dbX[3])
+        env.MaxX = max(max(max(dbX[0], dbX[1]), dbX[2]), dbX[3])
+        env.MinY = min(min(min(dbY[0], dbY[1]), dbY[2]), dbY[3])
+        env.MaxY = max(max(max(dbY[0], dbY[1]), dbY[2]), dbY[3])
+    except RuntimeError as ex:
+        raise IOError(ex)
     # print(dbMinx)
     # print(dbMaxx)
     # print(dbMiny)
