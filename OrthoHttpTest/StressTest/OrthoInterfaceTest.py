@@ -119,4 +119,7 @@ def FuseFlowTest2(url,refImgFolder,dataFolder,outFolder):
         #查找对应的基准数据
         for i in range(0, len(pan_list)):
             ref_list = []
-            geo_tool.searchRefImg.GetRefData(pan_list[0], refImgFolder, ref_list)
+            geo_tool.searchRefImg.GetRefData(pan_list[i], refImgFolder, ref_list)
+            if (len(ref_list)>0):
+                for j in range(0, len(ref_list)):
+                    print(ref_list[j])

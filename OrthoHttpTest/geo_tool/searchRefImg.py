@@ -76,3 +76,11 @@ def GetRefData(imgFile,ref_folder,ref_list):
     file_ext = '.tif'
     all_ref_list = []
     util.filelib.traverse_folder(ref_folder, all_ref_list, file_ext)
+    if(0==len(all_ref_list)):
+         return 0
+
+    envRef = RasterEnv()
+    for i in range(0, len(all_ref_list)):
+        GetRasterEnv(all_ref_list[i], envRef)
+        if(Intersects(env,envRef)>0):
+            ref_list.append(all_ref_list[i])
