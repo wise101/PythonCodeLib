@@ -23,7 +23,7 @@ class RasterEnv:
     #     self.MinX = min_x
 
 def Intersects(env1,env2):
-    return env1.MinX <= env2.MaxX and env1.MaxX >= env2.Minx and env1.MinY <= env2.MaxY and env1.MaxY >= env2.MinY
+    return env1.MinX <= env2.MaxX and env1.MaxX >= env2.MinX and env1.MinY <= env2.MaxY and env1.MaxY >= env2.MinY
 
 def PixelToWorld_Ex(adfGeoTransform,lCol, lRow, pt):
     #pt = Point()
