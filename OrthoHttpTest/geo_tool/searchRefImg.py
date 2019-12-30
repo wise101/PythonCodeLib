@@ -35,7 +35,7 @@ def GetRasterEnv(imgFile,env):
     #gdal.UseExceptions()
     dataset = gdal.Open(imgFile)
 
-    if(dataset is none)
+    if(dataset is none):
         print('open image file failed')
 #   print(imgFile, ' 宽=', dataset.RasterXSize)
         adfGeoTransform = dataset.GetGeoTransform()
