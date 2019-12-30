@@ -21,7 +21,7 @@ def traverse_folder(root_dir,file_list,file_ext):
             continue
         path = os.path.join(root_dir,item.path)
         if item.is_dir():
-              traverse_folder(path,file_list)
+              traverse_folder(path,file_list,file_ext)
         elif item.is_file():
             if os.path.splitext(item.path)[1] == file_ext:
               file_list.append(item.path)
