@@ -37,12 +37,14 @@ def GetRasterEnv(imgFile,env):
 
     if(dataset is None):
         print('open image file failed')
+        return
 #   print(imgFile, ' 宽=', dataset.RasterXSize)
-        adfGeoTransform = dataset.GetGeoTransform()
+
     # 左上角地理坐标
     #print(adfGeoTransform[0])
     #print(adfGeoTransform[3])
     else:
+        adfGeoTransform = dataset.GetGeoTransform()
         lWidth = dataset.RasterXSize
         lHeight = dataset.RasterYSize
         # print(lWidth)
