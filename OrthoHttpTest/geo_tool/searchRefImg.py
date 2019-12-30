@@ -32,14 +32,17 @@ def PixelToWorld_Ex(adfGeoTransform,lCol, lRow, pt):
 
 def GetRasterEnv(imgFile,env):
     #print(imgFile)
-    gdal.UseExceptions()
-    try:
-        dataset = gdal.Open(imgFile)
+    #gdal.UseExceptions()
+    dataset = gdal.Open(imgFile)
+
+    if(dataset is none)
+        print('open image file failed')
 #   print(imgFile, ' 宽=', dataset.RasterXSize)
         adfGeoTransform = dataset.GetGeoTransform()
     # 左上角地理坐标
     #print(adfGeoTransform[0])
     #print(adfGeoTransform[3])
+    else:
         lWidth = dataset.RasterXSize
         lHeight = dataset.RasterYSize
         # print(lWidth)
@@ -64,8 +67,8 @@ def GetRasterEnv(imgFile,env):
         env.MaxX = max(max(max(dbX[0], dbX[1]), dbX[2]), dbX[3])
         env.MinY = min(min(min(dbY[0], dbY[1]), dbY[2]), dbY[3])
         env.MaxY = max(max(max(dbY[0], dbY[1]), dbY[2]), dbY[3])
-    except RuntimeError as ex:
-        raise IOError(ex)
+    # except RuntimeError as ex:
+    #     raise IOError(ex)
     # print(dbMinx)
     # print(dbMaxx)
     # print(dbMiny)
