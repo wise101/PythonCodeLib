@@ -32,7 +32,7 @@ def PixelToWorld_Ex(adfGeoTransform,lCol, lRow, pt):
 
 def GetRasterEnv(imgFile,env):
     print(imgFile)
-    dataset = gdal.Open(imgFile,1)
+    dataset = gdal.Open(imgFile)
 #   print(imgFile, ' 宽=', dataset.RasterXSize)
     adfGeoTransform = dataset.GetGeoTransform()
     # 左上角地理坐标
