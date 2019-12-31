@@ -167,6 +167,7 @@ def ImgRgbOutput():
     outFolder = '/usr/seis/data/admin/Quanliucheng/langfang/dodgingOut/'
     jsonArgument.clear()
     url = "http://172.16.40.54:6060/ortho/api/v1/rawdata/geoTemplateDodging"
+    mosaic_list = []
     for i in range(0, len(trueColorfile_list)):
         jsonArgument["imgPath"] = trueColorfile_list[i]
         jsonArgument["templatePath"] = '/usr/seis/data/admin/Quanliucheng/langfang/REF/langfangmos.img'
@@ -174,7 +175,16 @@ def ImgRgbOutput():
         fileName = os.path.basename(trueColorfile_list[i])
         outImgPath = os.path.splitext(fileName)[0] + "_dodging.tiff"
         outImgPath = outFolder + outImgPath
+        mosaic_list.append(outImgPath)
         jsonArgument["outImgPath"] = outImgPath
         json_str = json.dumps(jsonArgument)
-        r11 = requests.post(url, data=json_str, timeout=5000, headers={'Content-Type': 'application/json'})
-        print(r11.text)
+        #r11 = requests.post(url, data=json_str, timeout=5000, headers={'Content-Type': 'application/json'})
+        #print(r11.text)
+
+    jsonArgument.clear()
+    url = "http://172.16.40.54:6060/ortho/api/v1/rawdata/mosaic"
+    jsonArgument["imgs"] = mosaic_list
+    jsonArgument["outPath"] = '/usr/seis/data/admin/Quanliucheng/langfang/mosaicOut/mosaic.tif'
+    json_str = json.dumps(jsonArgument)
+    r11 = requests.post(url, data=json_str, timeout=5000, headers={'Content-Type': 'application/json'})
+    print(r11.text)
