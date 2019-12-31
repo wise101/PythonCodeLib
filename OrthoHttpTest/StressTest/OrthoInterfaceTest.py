@@ -123,3 +123,39 @@ def FuseFlowTest2(url,refImgFolder,dataFolder,outFolder):
             if (len(ref_list)>0):
                 for j in range(0, len(ref_list)):
                     print(ref_list[j])
+
+def ImgRgbOutput():
+
+    #输入文件夹
+    inFolder = '/sedata/data/admin/Quanliucheng/langfang/out'
+
+    #输出文件夹
+    outFolder = '/usr/seis/data/admin/Quanliucheng/langfang/trueColorOutput/'
+
+    file_ext = '.tiff'
+    file_list = []
+    util.filelib.traverse_folder(inFolder, file_list, file_ext)
+    if(0==len(file_list)):
+         return 0
+
+    for i in range(0, len(file_list)):
+        imgPath = file_list[i]
+        imgPath = imgPath.replace('/sedata/', '/usr/seis/')
+        autoStretch = 1
+        vegParm = 0.1
+
+        fileName = os.path.basename(file_list[i])
+        trueColorFile = os.path.splitext(fileName)[0] + "_trueColor.tiff"
+        #outImgPath = '/sedata/data/admin/Quanliucheng/langfang/trueColorOutput/GF1_PMS2_E117.0_N39.6_20131127_L1A0000117693-PAN2_trueColor.tiff'
+        #outImgPath = outImgPath.replace('/sedata/', '/usr/seis/')
+        jsonArgument = {}
+        jsonArgument["imgPath"] = imgPath
+        jsonArgument["autoStretch"] = autoStretch
+        jsonArgument["vegParm"] = vegParm
+        jsonArgument["outImgPath"] = outFolder+trueColorFile
+        jsonArgument["logPath"] = ''
+        # 设置超时时间为10000秒
+        url = "http://172.16.40.54:6060/ortho/api/v1/rawdata/trueColorOutput"
+        json_str = json.dumps(jsonArgument)
+        r11 = requests.post(url, data=json_str, timeout=10000, headers={'Content-Type': 'application/json'})
+        print(r11.text)

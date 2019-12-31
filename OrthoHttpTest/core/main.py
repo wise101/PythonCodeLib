@@ -30,7 +30,8 @@ if __name__ == "__main__":
     refImgFolder = '/sedata/data/admin/Quanliucheng/National_2M_hubei_420000/Standard_5W_DOM'
     dataFolder = '/sedata/data/admin/Quanliucheng/Original_hubeiorchongqing_410000or500000/decompress'
     outFolder = '/sedata/data/admin/Quanliucheng/Original_hubeiorchongqing_410000or500000/out'
-    StressTest.OrthoInterfaceTest.FuseFlowTest2(url,refImgFolder,dataFolder,outFolder)
+    #StressTest.OrthoInterfaceTest.FuseFlowTest2(url,refImgFolder,dataFolder,outFolder)
+    StressTest.OrthoInterfaceTest.ImgRgbOutput()
 
 #   root_path = r"/home/work/PythonCodeLib"
     #用来存放所有的文件路径
