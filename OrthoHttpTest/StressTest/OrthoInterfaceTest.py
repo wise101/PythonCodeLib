@@ -138,6 +138,8 @@ def ImgRgbOutput():
     if(0==len(file_list)):
          return 0
 
+    trueColorfile_list = []
+    url = "http://172.16.40.54:6060/ortho/api/v1/rawdata/trueColorOutput"
     for i in range(0, len(file_list)):
         imgPath = file_list[i]
         imgPath = imgPath.replace('/sedata/', '/usr/seis/')
@@ -152,11 +154,27 @@ def ImgRgbOutput():
         jsonArgument["imgPath"] = imgPath
         jsonArgument["autoStretch"] = autoStretch
         jsonArgument["vegParm"] = vegParm
-        jsonArgument["outImgPath"] = outFolder+trueColorFile
+        outImgPath = outFolder+trueColorFile
+        jsonArgument["outImgPath"] = outImgPath
         jsonArgument["logPath"] = ''
         # 设置超时时间为10000秒
-        url = "http://172.16.40.54:6060/ortho/api/v1/rawdata/trueColorOutput"
         json_str = json.dumps(jsonArgument)
         #r11 = requests.post(url, data=json_str, timeout=10000, headers={'Content-Type': 'application/json'})
+        #r11 = requests.post(url, data=json_str, timeout=5000, headers={'Content-Type': 'application/json'})
+        #print(r11.text)
+        trueColorfile_list.append(outImgPath)
+
+    outFolder = '/usr/seis/data/admin/Quanliucheng/langfang/dodgingOut/'
+    jsonArgument.clear()
+    url = "http://172.16.40.54:6060/ortho/api/v1/rawdata/geoTemplateDodging"
+    for i in range(0, len(trueColorfile_list)):
+        jsonArgument["imgPath"] = trueColorfile_list[i]
+        jsonArgument["templatePath"] = '/usr/seis/data/admin/Quanliucheng/langfang/REF/langfangmos.img'
+
+        fileName = os.path.basename(trueColorfile_list[i])
+        outImgPath = os.path.splitext(fileName)[0] + "_dodging.tiff"
+        outImgPath = outFolder + outImgPath
+        jsonArgument["outImgPath"] = outImgPath
+        json_str = json.dumps(jsonArgument)
         r11 = requests.post(url, data=json_str, timeout=5000, headers={'Content-Type': 'application/json'})
         print(r11.text)
