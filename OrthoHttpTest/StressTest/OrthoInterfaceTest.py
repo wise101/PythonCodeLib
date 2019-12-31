@@ -157,5 +157,6 @@ def ImgRgbOutput():
         # 设置超时时间为10000秒
         url = "http://172.16.40.54:6060/ortho/api/v1/rawdata/trueColorOutput"
         json_str = json.dumps(jsonArgument)
-        r11 = requests.post(url, data=json_str, timeout=10000, headers={'Content-Type': 'application/json'})
+        #r11 = requests.post(url, data=json_str, timeout=10000, headers={'Content-Type': 'application/json'})
+        r11 = requests.post(url, data=json_str, timeout=5000, headers={'Content-Type': 'application/json'})
         print(r11.text)
