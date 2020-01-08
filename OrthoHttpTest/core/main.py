@@ -15,7 +15,7 @@ sys.path.append(third_path)
 
 import util.filelib
 import StressTest.OrthoInterfaceTest
-#import geo_tool.searchRefImg
+import geo_tool.searchRefImg
 #import network.httpService
 # import json
 # import requests
