@@ -76,6 +76,24 @@ def GetRasterEnv(imgFile,env):
     # print(dbMiny)
     # print(dbMaxy)
 
+def ImgIntersects(file1,file2):
+    env1 = RasterEnv()
+    env2 = RasterEnv()
+    GetRasterEnv(file1, env1)
+    print(env1.MinX)
+    print(env1.MaxX)
+    print(env1.MinY)
+    print(env1.MaxY)
+    GetRasterEnv(file2, env2)
+    print(env2.MinX)
+    print(env2.MaxX)
+    print(env2.MinY)
+    print(env2.MaxY)
+    if(1==Intersects(env1, env2)):
+        print('intersect')
+    else
+        print('no intersect')
+
 #imgFile        --- 影像文件路径
 #ref_folder     --- 基准文件夹
 #ref_list       --- 输出参数：基准数组
