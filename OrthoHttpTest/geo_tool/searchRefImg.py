@@ -91,7 +91,7 @@ def ImgIntersects(file1,file2):
     print(env2.MaxY)
     if(1==Intersects(env1, env2)):
         print('intersect')
-    else
+    else:
         print('no intersect')
 
 #imgFile        --- 影像文件路径
