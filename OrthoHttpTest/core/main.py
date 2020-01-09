@@ -15,7 +15,7 @@ sys.path.append(third_path)
 
 import util.filelib
 import StressTest.OrthoInterfaceTest
-import geo_tool.searchRefImg
+#import geo_tool.searchRefImg
 #import network.httpService
 # import json
 # import requests
@@ -33,6 +33,8 @@ if __name__ == "__main__":
     #StressTest.OrthoInterfaceTest.FuseFlowTest2(url,refImgFolder,dataFolder,outFolder)
     #StressTest.OrthoInterfaceTest.ImgRgbOutput()
 
+    StressTest.OrthoInterfaceTest.MassDataTest()
+
 #   root_path = r"/home/work/PythonCodeLib"
     #用来存放所有的文件路径
     #file_list = []
@@ -42,9 +44,9 @@ if __name__ == "__main__":
     #imgFile = r"D:\TestData\OrthoAlgoTestData\src\GF1_PMS1_E115.7_N38.9_20180409_L1A0003111678_FUSION_GEO.tiff"
     #imgFile = r"/sedata/data/admin/Quanliucheng/Original_hubeiorchongqing_410000or500000/decompress/GF1_PMS1_E111.5_N30.0_20190725_L1A0004140035-PAN1/GF1_PMS1_E111.5_N30.0_20190725_L1A0004140035-PAN1.tiff"
     imgFile = r"/mount/nfs-247/Remote_Sensing_Cloud_Data/National_2m_Standard_Product_Data/410000_test_2016/hn16.tif"
-    env = geo_tool.searchRefImg.RasterEnv()
-    geo_tool.searchRefImg.GetRasterEnv(imgFile,env)
-    print(env.MinX)
+    #env = geo_tool.searchRefImg.RasterEnv()
+    #geo_tool.searchRefImg.GetRasterEnv(imgFile,env)
+    #print(env.MinX)
 
 
     #url = "http://pv.sohu.com/cityjson?ie=utf-8"

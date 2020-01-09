@@ -188,3 +188,59 @@ def ImgRgbOutput():
     json_str = json.dumps(jsonArgument)
     r11 = requests.post(url, data=json_str, timeout=5000, headers={'Content-Type': 'application/json'})
     print(r11.text)
+
+#GF2大数据量测试
+def MassDataTest():
+    #输入文件夹
+    inFolder = '/mount/nfs-247/MapData/DataRaster/original/GF2/2018/410000/decompression'
+
+    #根据文件夹来筛选全色文件和多光谱文件
+    file_ext = '.tiff'
+    pan_list = []
+    util.filelib.SearchSpecData(inFolder, pan_list, 'PAN')
+    if (0 == len(pan_list)):
+        return 0
+
+    mss_list = []
+    util.filelib.SearchSpecData(inFolder, mss_list, 'MSS')
+    if(0==len(mss_list)):
+         return 0
+
+    #全色影像和高光谱影像进行配对
+    new_pan_list = []
+    new_mss_list = []
+    if(1==ImagePair(docker_pan_files, docker_mss_files, new_pan_list, new_mss_list)):
+        # 构造ortho接口json字符串
+        jsonArgument = {}
+        jsonArgument["constZ"] = 0
+        jsonArgument["demPath"] = "/mount/nfs-247/MapData/DEM/dem_30m/DEM-Gloable.tif"
+        jsonArgument["feedNum"] = 1000
+        jsonArgument["similarParm"] = 1
+        jsonArgument["rpcError"] = 5.0
+        # 配置输出文件夹
+        outFolder = "/mount/nfs-247/MapData/out/fuse"
+        # 配置基准文件
+        panRefImgs = ["/mount/nfs-247/Remote_Sensing_Cloud_Data/National_2m_Standard_Product_Data/410000_test_2016/hn16.tif"]
+        jsonArgument["panRefImgs"] = panRefImgs
+        jsonArgument["orthoMssRes"] = 0.000008
+        jsonArgument["orthoPanRes"] = 0.000032
+        jsonArgument["orthoWKT"] = ""
+        url = "http://172.16.40.53:19091/ortho/api/v1/rawdata/fuse"
+        for i in range(0, len(new_pan_list)):
+            fileName = os.path.basename(new_pan_list[i])
+            fuseFile = os.path.splitext(fileName)[0] + "_fuse.tiff"
+            jsonArgument["imgFusePath"] = outFolder+fuseFile
+            jsonArgument["panPath"] = new_pan_list[i]
+            jsonArgument["panOrthoPath"] = outFolder + fileName
+            mssFileName = os.path.basename(new_mss_list[i])
+            jsonArgument["mssPath"] = new_mss_list[i]
+            jsonArgument["mssOrthoPath"] = outFolder + mssFileName
+            # 转换成json字符串
+            json_str = json.dumps(jsonArgument)
+            print(json_str)
+            r11 = requests.post(url,data=json_str,timeout=10000,headers={'Content-Type': 'application/json'})
+            print(r11.text)
+
+    #输出文件夹
+    outFolder = '/usr/seis/data/admin/Quanliucheng/langfang/trueColorOutput/'
+
