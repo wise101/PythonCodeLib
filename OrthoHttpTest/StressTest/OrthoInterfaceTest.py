@@ -74,8 +74,6 @@ def FuseFlowTest():
         url = "http://172.16.40.54:6060/ortho/api/v1/rawdata/fuse"
         for i in range(0, len(new_pan_list)):
             fileName = os.path.basename(new_pan_list[i])
-            if(fileName=='GF2_PMS2_E115.1_N32.4_20190121_L1A0003776527-PAN2.tiff'):
-                continue
             fuseFile = os.path.splitext(fileName)[0] + "_fuse.tiff"
             jsonArgument["imgFusePath"] = outFolder+fuseFile
             jsonArgument["panPath"] = new_pan_list[i]
@@ -230,6 +228,8 @@ def MassDataTest():
         url = "http://172.16.40.53:19091/ortho/api/v1/rawdata/fuse"
         for i in range(0, len(new_pan_list)):
             fileName = os.path.basename(new_pan_list[i])
+            if(fileName=='GF2_PMS2_E115.1_N32.4_20190121_L1A0003776527-PAN2.tiff'):
+                continue
             fuseFile = os.path.splitext(fileName)[0] + "_fuse.tiff"
             jsonArgument["imgFusePath"] = outFolder+fuseFile
             jsonArgument["panPath"] = new_pan_list[i]
