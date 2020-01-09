@@ -209,7 +209,7 @@ def MassDataTest():
     #全色影像和高光谱影像进行配对
     new_pan_list = []
     new_mss_list = []
-    if(1==ImagePair(docker_pan_files, docker_mss_files, new_pan_list, new_mss_list)):
+    if(1==ImagePair(pan_list, mss_list, new_pan_list, new_mss_list)):
         # 构造ortho接口json字符串
         jsonArgument = {}
         jsonArgument["constZ"] = 0
