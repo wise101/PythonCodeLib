@@ -218,7 +218,7 @@ def MassDataTest():
         jsonArgument["similarParm"] = 1
         jsonArgument["rpcError"] = 5.0
         # 配置输出文件夹
-        outFolder = "/mount/nfs-247/MapData/out/fuse"
+        outFolder = "/mount/nfs-247/MapData/out/fuse/"
         # 配置基准文件
         panRefImgs = ["/mount/nfs-247/Remote_Sensing_Cloud_Data/National_2m_Standard_Product_Data/410000_test_2016/hn16.tif"]
         jsonArgument["panRefImgs"] = panRefImgs
