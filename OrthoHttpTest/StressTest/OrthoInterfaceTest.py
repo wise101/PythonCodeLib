@@ -218,7 +218,8 @@ def MassDataTest():
         jsonArgument["similarParm"] = 1
         jsonArgument["rpcError"] = 5.0
         # 配置输出文件夹
-        outFolder = "/mount/nfs-247/MapData/out/fuse/"
+        outFuseFolder = "/mount/nfs-247/MapData/out/fuse/"
+        outOrthoFolder = "/mount/nfs-247/MapData/out/ortho/"
         # 配置基准文件
         panRefImgs = ["/mount/nfs-247/Remote_Sensing_Cloud_Data/National_2m_Standard_Product_Data/410000_test_2016/hn16.tif"]
         jsonArgument["panRefImgs"] = panRefImgs
@@ -226,23 +227,24 @@ def MassDataTest():
         jsonArgument["orthoPanRes"] = 0.000032
         jsonArgument["orthoWKT"] = ""
         url = "http://172.16.40.53:19091/ortho/api/v1/rawdata/fuse"
+        timeout = len(new_pan_list)*900
         for i in range(0, len(new_pan_list)):
             fileName = os.path.basename(new_pan_list[i])
-            if(fileName=='GF2_PMS2_E115.1_N32.4_20190121_L1A0003776527-PAN2.tiff'):
+            if(fileName=='GF2_PMS2_E115.1_N32.4_20190121_L1A000377652 7-PAN2.tiff'):
                 continue
             fuseFile = os.path.splitext(fileName)[0] + "_fuse.tiff"
-            jsonArgument["imgFusePath"] = outFolder+fuseFile
+            jsonArgument["imgFusePath"] = outFuseFolder+fuseFile
             jsonArgument["panPath"] = new_pan_list[i]
-            jsonArgument["panOrthoPath"] = outFolder + fileName
+            jsonArgument["panOrthoPath"] = outOrthoFolder + fileName
             mssFileName = os.path.basename(new_mss_list[i])
             jsonArgument["mssPath"] = new_mss_list[i]
-            jsonArgument["mssOrthoPath"] = outFolder + mssFileName
+            jsonArgument["mssOrthoPath"] = outOrthoFolder + mssFileName
             # 转换成json字符串
             json_str = json.dumps(jsonArgument)
             print(json_str)
-            r11 = requests.post(url,data=json_str,timeout=10000,headers={'Content-Type': 'application/json'})
+            r11 = requests.post(url,data=json_str,timeout,headers={'Content-Type': 'application/json'})
             print(r11.text)
 
     #输出文件夹
-    outFolder = '/usr/seis/data/admin/Quanliucheng/langfang/trueColorOutput/'
+    #outFolder = '/usr/seis/data/admin/Quanliucheng/langfang/trueColorOutput/'
 
