@@ -221,19 +221,23 @@ def MassDataTest():
         outFuseFolder = "/mount/nfs-247/MapData/out/fuse/"
         outOrthoFolder = "/mount/nfs-247/MapData/out/ortho/"
         # 配置基准文件
-        panRefImgs = ["/mount/nfs-247/Remote_Sensing_Cloud_Data/National_2m_Standard_Product_Data/410000_test_2016/hn16.tif"]
-        jsonArgument["panRefImgs"] = panRefImgs
+        #panRefImgs = ["/mount/nfs-247/Remote_Sensing_Cloud_Data/National_2m_Standard_Product_Data/410000_test_2016/hn16.tif"]
         jsonArgument["orthoMssRes"] = 0.000008
         jsonArgument["orthoPanRes"] = 0.000032
         jsonArgument["orthoWKT"] = ""
         url = "http://172.16.40.53:19091/ortho/api/v1/rawdata/fuse"
-        #计算超时时间
+        ref_folder = "/mount/nfs-247/Remote_Sensing_Cloud_Data/National_2m_Standard_Product_Data"
+        #计算超时时间,一景影像默认设置超时900秒
         time = len(new_pan_list)*900
         for i in range(0, len(new_pan_list)):
-            fileName = os.path.basename(new_pan_list[i])
-            # if(fileName=='GF2_PMS2_E115.1_N32.4_20190121_L1A0003776527-PAN2.tiff'):
-            #     continue
+            #查找基准影像，如果基准影像数组为空，则不执行
+            panRefImgs = []
+            geo_tool.searchRefImg.GetRefData(new_pan_list[i], ref_folder, panRefImgs)
+            if(0==len(panRefImgs)):
+                continue
             
+            jsonArgument["panRefImgs"] = panRefImgs
+            fileName = os.path.basename(new_pan_list[i])
             fuseFile = os.path.splitext(fileName)[0] + "_fuse.tiff"
             jsonArgument["imgFusePath"] = outFuseFolder+fuseFile
             jsonArgument["panPath"] = new_pan_list[i]
