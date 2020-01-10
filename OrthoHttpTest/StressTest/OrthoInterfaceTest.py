@@ -231,8 +231,8 @@ def MassDataTest():
         time = len(new_pan_list)*900
         for i in range(0, len(new_pan_list)):
             fileName = os.path.basename(new_pan_list[i])
-            if(fileName=='GF2_PMS2_E115.1_N32.4_20190121_L1A0003776527-PAN2.tiff'):
-                continue
+            # if(fileName=='GF2_PMS2_E115.1_N32.4_20190121_L1A0003776527-PAN2.tiff'):
+            #     continue
             
             fuseFile = os.path.splitext(fileName)[0] + "_fuse.tiff"
             jsonArgument["imgFusePath"] = outFuseFolder+fuseFile
