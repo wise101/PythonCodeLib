@@ -227,15 +227,18 @@ def MassDataTest():
         jsonArgument["orthoWKT"] = ""
         url = "http://172.16.40.53:19091/ortho/api/v1/rawdata/fuse"
         ref_folder = "/mount/nfs-247/Remote_Sensing_Cloud_Data/National_2m_Standard_Product_Data"
+        panRefImgs = ["/mount/nfs-247/Remote_Sensing_Cloud_Data/National_2m_Standard_Product_Data/410000_test_2016/hn16.tif"]
         #计算超时时间,一景影像默认设置超时900秒
         time = len(new_pan_list)*900
         for i in range(0, len(new_pan_list)):
             #查找基准影像，如果基准影像数组为空，则不执行
-            panRefImgs = []
-            geo_tool.searchRefImg.GetRefData(new_pan_list[i], ref_folder, panRefImgs)
-            if(0==len(panRefImgs)):
-                continue
-            
+            #panRefImgs = []
+            # geo_tool.searchRefImg.GetRefData(new_pan_list[i], ref_folder, panRefImgs)
+            # if(0==len(panRefImgs)):
+            #     continue
+            if(0==geo_tool.searchRefImg.ImgIntersects(panRefImgs[0],new_pan_list[i]))
+                  continue
+
             jsonArgument["panRefImgs"] = panRefImgs
             fileName = os.path.basename(new_pan_list[i])
             fuseFile = os.path.splitext(fileName)[0] + "_fuse.tiff"
