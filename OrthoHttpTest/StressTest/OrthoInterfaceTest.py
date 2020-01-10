@@ -236,7 +236,7 @@ def MassDataTest():
             # geo_tool.searchRefImg.GetRefData(new_pan_list[i], ref_folder, panRefImgs)
             # if(0==len(panRefImgs)):
             #     continue
-            if(0==geo_tool.searchRefImg.ImgIntersects(panRefImgs[0],new_pan_list[i]))
+            if(0==geo_tool.searchRefImg.ImgIntersects(panRefImgs[0],new_pan_list[i])):
                   continue
 
             jsonArgument["panRefImgs"] = panRefImgs
