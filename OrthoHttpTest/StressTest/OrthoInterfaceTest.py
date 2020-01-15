@@ -189,6 +189,58 @@ def ImgRgbOutput():
     r11 = requests.post(url, data=json_str, timeout=5000, headers={'Content-Type': 'application/json'})
     print(r11.text)
 
+#北京数据压力测试
+def BeijingDataStressTest(url,dataFolder,outFolder):
+    pan_list = []
+    util.filelib.SearchSpecData(dataFolder,pan_list,'PAN')
+    if(0==len(pan_list)):
+        return 0
+
+    #全色数据路径替换为docker里面的路径
+    # for i in range(0, len(pan_list)):
+    #      pan_list[i] = pan_list[i].replace('/sedata/','/usr/seis/')
+
+    mss_list = []
+    util.filelib.SearchSpecData(dataFolder, mss_list, 'MSS')
+    if(0==len(mss_list)):
+         return 0
+
+    # 多光谱数据路径替换为docker里面的路径
+    # for i in range(0, len(mss_list)):
+    #     mss_list[i] = mss_list[i].replace('/sedata/','/usr/seis/')
+    #全色数据和多光谱数据配对
+    new_pan_list = []
+    new_mss_list = []
+    if(1==ImagePair(pan_list,mss_list, new_pan_list, new_mss_list)):
+        #查找对应的基准数据
+        ref_list = ['/mount/data/MapData/pie-algorithm/pie-ortho/beijing/ref/budong.tif','/mount/data/MapData/pie-algorithm/pie-ortho/beijing/ref/dom2.img']
+        jsonArgument = {}
+        jsonArgument["constZ"] = 0
+        jsonArgument["demPath"] = "/mount/data/MapData/pie-algorithm/pie-ortho/beijing/dem/HaiHe1.img"
+        jsonArgument["feedNum"] = 1000
+        jsonArgument["similarParm"] = 1
+        jsonArgument["rpcError"] = 5.0
+        jsonArgument["panRefImgs"] = ['/mount/data/MapData/pie-algorithm/pie-ortho/beijing/ref/budong.tif','/mount/data/MapData/pie-algorithm/pie-ortho/beijing/ref/dom2.img']
+        jsonArgument["orthoMssRes"] = 0.00008
+        jsonArgument["orthoPanRes"] = 0.00002
+        jsonArgument["orthoWKT"] = ""
+        for i in range(0, len(new_pan_list)):
+            fileName = os.path.basename(new_pan_list[i])
+            fuseFile = os.path.splitext(fileName)[0] + "_fuse.tiff"
+            jsonArgument["imgFusePath"] = outFolder+'fuse/'+fuseFile
+            jsonArgument["panPath"] = new_pan_list[i]
+            jsonArgument["panOrthoPath"] = outFolder +'panOrtho/' +fileName
+            mssFileName = os.path.basename(new_mss_list[i])
+            jsonArgument["mssPath"] = new_mss_list[i]
+            jsonArgument["mssOrthoPath"] = outFolder +'mssOrtho/'+ mssFileName
+            # 转换成json字符串
+            json_str = json.dumps(jsonArgument)
+            print(json_str)
+            #r11 = requests.post(url, data=json_str,headers={'Content-Type': 'application/json'})
+            #设置超时时间为10000秒
+            r11 = requests.post(url,data=json_str,timeout=10000,headers={'Content-Type': 'application/json'})
+            print(r11.text)
+
 #GF2大数据量测试
 def MassDataTest():
     #输入文件夹

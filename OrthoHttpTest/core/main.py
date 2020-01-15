@@ -13,6 +13,10 @@ third_path = os.path.split(curPath)[0]+os.path.sep+r"ThirdPartyLib"
 print(third_path)
 sys.path.append(third_path)
 
+# import gdal, osr
+# import osgeo.gdal
+# osgeo.gdal.GetDriverByName
+
 import util.filelib
 import StressTest.OrthoInterfaceTest
 #import geo_tool.searchRefImg
@@ -26,14 +30,17 @@ if __name__ == "__main__":
     #StressTest.OrthoInterfaceTest.FuseFlowTest(data_folder)
     #StressTest.OrthoInterfaceTest.FuseFlowTest()
 
-    url = "http://172.16.40.54:6060/ortho/api/v1/rawdata/fuse"
+    url = "http://172.16.40.53:19091/ortho/api/v1/rawdata/fuse"
     refImgFolder = '/sedata/data/admin/Quanliucheng/National_2M_hubei_420000/Standard_5W_DOM'
-    dataFolder = '/sedata/data/admin/Quanliucheng/Original_hubeiorchongqing_410000or500000/decompress'
-    outFolder = '/sedata/data/admin/Quanliucheng/Original_hubeiorchongqing_410000or500000/out'
+    dataFolder = '/mount/data/MapData/pie-algorithm/pie-ortho/beijing/gf'
+    outFolder = '/mount/data/MapData/pie-algorithm/pie-ortho/beijing/out'
     #StressTest.OrthoInterfaceTest.FuseFlowTest2(url,refImgFolder,dataFolder,outFolder)
     #StressTest.OrthoInterfaceTest.ImgRgbOutput()
 
-    StressTest.OrthoInterfaceTest.MassDataTest()
+    StressTest.OrthoInterfaceTest.BeijingDataStressTest(url, dataFolder, outFolder)
+
+    #StressTest.OrthoInterfaceTest.MassDataTest()
+    #dataset = gdal.Open('D:\\TestData\\GF2_PMS2_E115.7_N32.0_20180430_L1A0003154291-PAN2.tiff')
 
 #   root_path = r"/home/work/PythonCodeLib"
     #用来存放所有的文件路径
