@@ -85,7 +85,7 @@ def GetRasterEnv(imgFile,env):
         env.MinY = min(min(min(dbY[0], dbY[1]), dbY[2]), dbY[3])
         env.MaxY = max(max(max(dbY[0], dbY[1]), dbY[2]), dbY[3])
 
-def ImgIntersects(file1,file2):
+#def ImgIntersects(file1,file2):
     # env1 = RasterEnv()
     # env2 = RasterEnv()
     # GetRasterEnv(file1, env1)
@@ -110,17 +110,17 @@ def ImgIntersects(file1,file2):
 #imgFile        --- 影像文件路径
 #ref_folder     --- 基准文件夹
 #ref_list       --- 输出参数：基准数组
-def GetRefData(imgFile,ref_folder,ref_list):
-    env = RasterEnv()
-    GetRasterEnv(imgFile, env)
-    file_ext = '.tif'
-    all_ref_list = []
-    util.filelib.traverse_folder(ref_folder, all_ref_list, file_ext)
-    if(0==len(all_ref_list)):
-         return 0
-
-    envRef = RasterEnv()
-    for i in range(0, len(all_ref_list)):
-        GetRasterEnv(all_ref_list[i], envRef)
-        if(Intersects(env,envRef)>0):
-            ref_list.append(all_ref_list[i])
+# def GetRefData(imgFile,ref_folder,ref_list):
+#     env = RasterEnv()
+#     GetRasterEnv(imgFile, env)
+#     file_ext = '.tif'
+#     all_ref_list = []
+#     util.filelib.traverse_folder(ref_folder, all_ref_list, file_ext)
+#     if(0==len(all_ref_list)):
+#          return 0
+#
+#     envRef = RasterEnv()
+#     for i in range(0, len(all_ref_list)):
+#         GetRasterEnv(all_ref_list[i], envRef)
+#         if(Intersects(env,envRef)>0):
+#             ref_list.append(all_ref_list[i])
