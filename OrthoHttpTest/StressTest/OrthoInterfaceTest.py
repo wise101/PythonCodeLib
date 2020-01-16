@@ -230,12 +230,12 @@ def BeijingDataStressTest(url,dataFolder,outFolder):
             if(fileName=='GF1_PMS1_E116.2_N40.3_20151012_L1A0001094173-PAN1.tiff'):
                 continue
             fuseFile = os.path.splitext(fileName)[0] + "_fuse.tiff"
-            jsonArgument["imgFusePath"] = outFolder+'fuse/'+fuseFile
+            jsonArgument["imgFusePath"] = outFolder+'/fuse/'+fuseFile
             jsonArgument["panPath"] = new_pan_list[i]
-            jsonArgument["panOrthoPath"] = outFolder +'panOrtho/' +fileName
+            jsonArgument["panOrthoPath"] = outFolder +'/panOrtho/' +fileName
             mssFileName = os.path.basename(new_mss_list[i])
             jsonArgument["mssPath"] = new_mss_list[i]
-            jsonArgument["mssOrthoPath"] = outFolder +'mssOrtho/'+ mssFileName
+            jsonArgument["mssOrthoPath"] = outFolder +'/mssOrtho/'+ mssFileName
             # 转换成json字符串
             json_str = json.dumps(jsonArgument)
             print(json_str)
