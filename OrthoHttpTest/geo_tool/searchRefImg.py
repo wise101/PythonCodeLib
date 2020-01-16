@@ -28,7 +28,7 @@ class RasterEnv:
 # def Intersects(env1,env2):
 #     return env1.MinX <= env2.MaxX and env1.MaxX >= env2.MinX and env1.MinY <= env2.MaxY and env1.MaxY >= env2.MinY
 
-def ImgIntersects(filePath1,filePath2)
+def ImgIntersects(filePath1,filePath2):
     lib = ctypes.CDLL("/home/work/GeoTool/src/OutDir/centos7_x64_release/CoordinateTransform.so")
     imgPath1 = bytes(filePath1, encoding='utf-8')
     imgPath2 = bytes(filePath2, encoding='utf-8')
