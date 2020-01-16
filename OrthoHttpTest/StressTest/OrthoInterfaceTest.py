@@ -224,6 +224,7 @@ def BeijingDataStressTest(url,dataFolder,outFolder):
         jsonArgument["orthoMssRes"] = 0.00008
         jsonArgument["orthoPanRes"] = 0.00002
         jsonArgument["orthoWKT"] = ""
+        time = len(new_pan_list) * 900
         for i in range(0, len(new_pan_list)):
             fileName = os.path.basename(new_pan_list[i])
             if(fileName=='GF1_PMS1_E116.2_N40.3_20151012_L1A0001094173-PAN1.tiff'):
@@ -240,7 +241,7 @@ def BeijingDataStressTest(url,dataFolder,outFolder):
             print(json_str)
             #r11 = requests.post(url, data=json_str,headers={'Content-Type': 'application/json'})
             #设置超时时间为10000秒
-            r11 = requests.post(url,data=json_str,timeout=10000,headers={'Content-Type': 'application/json'})
+            r11 = requests.post(url,data=json_str,timeout=time,headers={'Content-Type': 'application/json'})
             print(r11.text)
 
 #GF2大数据量测试
