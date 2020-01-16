@@ -231,6 +231,8 @@ def BeijingDataStressTest(url,dataFolder,outFolder):
                 continue
             if (fileName == 'GF1_PMS1_E116.0_N39.7_20151012_L1A0001094175-PAN1.tiff'):
                 continue
+            if (fileName == 'GF1_PMS2_E116.5_N39.9_20151012_L1A0001093940-PAN2.tiff'):
+                continue
             fuseFile = os.path.splitext(fileName)[0] + "_fuse.tiff"
             jsonArgument["imgFusePath"] = outFolder+'/fuse/'+fuseFile
             jsonArgument["panPath"] = new_pan_list[i]
