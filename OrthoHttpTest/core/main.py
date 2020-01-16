@@ -37,9 +37,10 @@ if __name__ == "__main__":
     #StressTest.OrthoInterfaceTest.FuseFlowTest2(url,refImgFolder,dataFolder,outFolder)
     #StressTest.OrthoInterfaceTest.ImgRgbOutput()
 
-    StressTest.OrthoInterfaceTest.BeijingDataStressTest(url, dataFolder, outFolder)
+    #StressTest.OrthoInterfaceTest.BeijingDataStressTest(url, dataFolder, outFolder)
 
-    #StressTest.OrthoInterfaceTest.MassDataTest()
+    StressTest.OrthoInterfaceTest.MassDataTest()
+
     #dataset = gdal.Open('D:\\TestData\\GF2_PMS2_E115.7_N32.0_20180430_L1A0003154291-PAN2.tiff')
 
 #   root_path = r"/home/work/PythonCodeLib"
