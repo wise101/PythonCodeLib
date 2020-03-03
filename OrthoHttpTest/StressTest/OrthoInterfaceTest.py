@@ -227,16 +227,16 @@ def BeijingDataStressTest(url,dataFolder,outFolder):
         time = len(new_pan_list) * 900
         for i in range(0, len(new_pan_list)):
             fileName = os.path.basename(new_pan_list[i])
-            if(fileName=='GF1_PMS1_E116.2_N40.3_20151012_L1A0001094173-PAN1.tiff'):
-                continue
-            if (fileName == 'GF1_PMS1_E116.0_N39.7_20151012_L1A0001094175-PAN1.tiff'):
-                continue
-            if (fileName == 'GF1_PMS2_E116.5_N39.9_20151012_L1A0001093940-PAN2.tiff'):
-                continue
-            if (fileName == 'GF1_PMS2_E116.6_N40.2_20151012_L1A0001093939-PAN2.tiff'):
-                continue
-            if (fileName == 'GF1_PMS1_E116.1_N40.0_20151012_L1A0001094174-PAN1.tiff'):
-                continue
+            # if(fileName=='GF1_PMS1_E116.2_N40.3_20151012_L1A0001094173-PAN1.tiff'):
+            #     continue
+            # if (fileName == 'GF1_PMS1_E116.0_N39.7_20151012_L1A0001094175-PAN1.tiff'):
+            #     continue
+            # if (fileName == 'GF1_PMS2_E116.5_N39.9_20151012_L1A0001093940-PAN2.tiff'):
+            #     continue
+            # if (fileName == 'GF1_PMS2_E116.6_N40.2_20151012_L1A0001093939-PAN2.tiff'):
+            #     continue
+            # if (fileName == 'GF1_PMS1_E116.1_N40.0_20151012_L1A0001094174-PAN1.tiff'):
+            #     continue
             fuseFile = os.path.splitext(fileName)[0] + "_fuse.tiff"
             jsonArgument["imgFusePath"] = outFolder+'/fuse/'+fuseFile
             jsonArgument["panPath"] = new_pan_list[i]
